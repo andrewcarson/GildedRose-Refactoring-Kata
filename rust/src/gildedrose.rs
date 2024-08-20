@@ -56,14 +56,11 @@ impl GildedRose {
     }
 
     fn update_aged_brie_quality(brie: &mut Item) {
-        if brie.quality < 50 {
-            brie.quality += 1;
-        }
         brie.sell_in -= 1;
-
-        if brie.sell_in < 0 && brie.quality < 50 {
-            // TODO: A double increment of the quality??
-            brie.quality += 1;
+        if brie.sell_in >= 0 {
+            brie.quality = cmp::min(50, brie.quality + 1);
+        } else {
+            brie.quality = cmp::min(50, brie.quality + 2);
         }
     }
 
