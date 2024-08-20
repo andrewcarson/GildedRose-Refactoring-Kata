@@ -65,17 +65,18 @@ impl GildedRose {
     }
 
     fn update_backstage_pass_quality(pass: &mut Item) {
-        if pass.quality < 50 {
-            pass.quality += 1;
-            if pass.sell_in < 11 && pass.quality < 50 {
-                pass.quality += 1;
-            }
-
-            if pass.sell_in < 6 && pass.quality < 50 {
-                pass.quality += 1;
-            }
-        }
         pass.sell_in -= 1;
+
+        pass.quality = cmp::min(50, pass.quality + 1);
+    
+        if pass.sell_in < 10 {
+            pass.quality = cmp::min(50, pass.quality + 1);
+        }
+
+        if pass.sell_in < 5 {
+            pass.quality = cmp::min(50, pass.quality + 1);
+        }
+    
         if pass.sell_in < 0 {
             pass.quality = 0;
         }
