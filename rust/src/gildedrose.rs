@@ -1,4 +1,6 @@
+use std::cmp;
 use std::fmt::{self, Display};
+
 pub struct Item {
     pub name: String,
     pub sell_in: i32,
@@ -45,14 +47,11 @@ impl GildedRose {
     }
 
     fn update_normal_item_quality(item: &mut Item) {
-        if item.quality > 0 {
-            item.quality -= 1;
-        }
-
         item.sell_in -= 1;
-
-        if item.sell_in < 0 && item.quality > 0 {
-            item.quality -= 1;
+        if item.sell_in >= 0 {
+            item.quality = cmp::max(0, item.quality - 1);
+        } else {
+            item.quality = cmp::max(0, item.quality - 2);
         }
     }
 
