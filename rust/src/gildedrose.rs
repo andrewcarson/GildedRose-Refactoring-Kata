@@ -42,23 +42,16 @@ impl GildedRose {
                 }
                 self.items[i].sell_in -= 1;
 
-                if self.items[i].sell_in < 0
-                    && self.items[i].quality < 50 {
-                        // TODO: A double increment of the quality??
-                        self.items[i].quality += 1;
+                if self.items[i].sell_in < 0 && self.items[i].quality < 50 {
+                    // TODO: A double increment of the quality??
+                    self.items[i].quality += 1;
                 }
                 continue;
             }
 
-            if self.items[i].name != "Backstage passes to a TAFKAL80ETC concert"
-            {
-                if self.items[i].quality > 0 {
-                    self.items[i].quality -= 1;
-                }
-            } else if self.items[i].quality < 50 {
-                self.items[i].quality += 1;
-
-                if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
+            if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
+                if self.items[i].quality < 50 {
+                    self.items[i].quality += 1;
                     if self.items[i].sell_in < 11 && self.items[i].quality < 50 {
                         self.items[i].quality += 1;
                     }
@@ -67,19 +60,22 @@ impl GildedRose {
                         self.items[i].quality += 1;
                     }
                 }
+                self.items[i].sell_in -= 1;
+                if self.items[i].sell_in < 0 {
+                    self.items[i].quality = 0;
+                }
+
+                continue;
+            }
+
+            if self.items[i].quality > 0 {
+                self.items[i].quality -= 1;
             }
 
             self.items[i].sell_in -= 1;
 
-            if self.items[i].sell_in < 0 {
-                if self.items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
-                    if self.items[i].quality > 0
-                    {
-                        self.items[i].quality -= 1;
-                    }
-                } else {
-                    self.items[i].quality = 0;
-                }
+            if self.items[i].sell_in < 0 && self.items[i].quality > 0 {
+                self.items[i].quality -= 1;
             }
         }
     }
