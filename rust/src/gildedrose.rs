@@ -68,7 +68,7 @@ impl GildedRose {
         pass.sell_in -= 1;
 
         pass.quality = cmp::min(50, pass.quality + 1);
-    
+
         if pass.sell_in < 10 {
             pass.quality = cmp::min(50, pass.quality + 1);
         }
@@ -76,7 +76,7 @@ impl GildedRose {
         if pass.sell_in < 5 {
             pass.quality = cmp::min(50, pass.quality + 1);
         }
-    
+
         if pass.sell_in < 0 {
             pass.quality = 0;
         }
