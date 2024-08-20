@@ -31,15 +31,15 @@ impl GildedRose {
     }
 
     pub fn update_quality(&mut self) {
-        for i in 0..self.items.len() {
-            if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
+        for item in self.items.iter_mut() {
+            if item.name == "Sulfuras, Hand of Ragnaros" {
                 // Do nothing
-            } else if self.items[i].name == "Aged Brie" {
-                GildedRose::update_aged_brie_quality(&mut self.items[i]);
-            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                GildedRose::update_backstage_pass_quality(&mut self.items[i]);
+            } else if item.name == "Aged Brie" {
+                GildedRose::update_aged_brie_quality(item);
+            } else if item.name == "Backstage passes to a TAFKAL80ETC concert" {
+                GildedRose::update_backstage_pass_quality(item);
             } else {
-                GildedRose::update_normal_item_quality(&mut self.items[i]);
+                GildedRose::update_normal_item_quality(item);
             }
         }
     }
