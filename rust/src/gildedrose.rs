@@ -33,50 +33,55 @@ impl GildedRose {
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
             if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                continue;
+                // Do nothing
+            } else if self.items[i].name == "Aged Brie" {
+                GildedRose::update_aged_brie_quality(&mut self.items[i]);
+            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
+                GildedRose::update_backstage_pass_quality(&mut self.items[i]);
+            } else {
+                GildedRose::update_normal_item_quality(&mut self.items[i]);
+            }
+        }
+    }
+
+    fn update_normal_item_quality(item: &mut Item) {
+        if item.quality > 0 {
+            item.quality -= 1;
+        }
+
+        item.sell_in -= 1;
+
+        if item.sell_in < 0 && item.quality > 0 {
+            item.quality -= 1;
+        }
+    }
+
+    fn update_aged_brie_quality(brie: &mut Item) {
+        if brie.quality < 50 {
+            brie.quality += 1;
+        }
+        brie.sell_in -= 1;
+
+        if brie.sell_in < 0 && brie.quality < 50 {
+            // TODO: A double increment of the quality??
+            brie.quality += 1;
+        }
+    }
+
+    fn update_backstage_pass_quality(pass: &mut Item) {
+        if pass.quality < 50 {
+            pass.quality += 1;
+            if pass.sell_in < 11 && pass.quality < 50 {
+                pass.quality += 1;
             }
 
-            if self.items[i].name == "Aged Brie" {
-                if self.items[i].quality < 50 {
-                    self.items[i].quality += 1;
-                }
-                self.items[i].sell_in -= 1;
-
-                if self.items[i].sell_in < 0 && self.items[i].quality < 50 {
-                    // TODO: A double increment of the quality??
-                    self.items[i].quality += 1;
-                }
-                continue;
+            if pass.sell_in < 6 && pass.quality < 50 {
+                pass.quality += 1;
             }
-
-            if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                if self.items[i].quality < 50 {
-                    self.items[i].quality += 1;
-                    if self.items[i].sell_in < 11 && self.items[i].quality < 50 {
-                        self.items[i].quality += 1;
-                    }
-
-                    if self.items[i].sell_in < 6 && self.items[i].quality < 50 {
-                        self.items[i].quality += 1;
-                    }
-                }
-                self.items[i].sell_in -= 1;
-                if self.items[i].sell_in < 0 {
-                    self.items[i].quality = 0;
-                }
-
-                continue;
-            }
-
-            if self.items[i].quality > 0 {
-                self.items[i].quality -= 1;
-            }
-
-            self.items[i].sell_in -= 1;
-
-            if self.items[i].sell_in < 0 && self.items[i].quality > 0 {
-                self.items[i].quality -= 1;
-            }
+        }
+        pass.sell_in -= 1;
+        if pass.sell_in < 0 {
+            pass.quality = 0;
         }
     }
 }
