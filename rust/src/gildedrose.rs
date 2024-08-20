@@ -72,7 +72,7 @@ impl GildedRose {
                             }
                         }
                     } else {
-                        self.items[i].quality = self.items[i].quality - self.items[i].quality;
+                        self.items[i].quality = 0;
                     }
                 } else {
                     if self.items[i].quality < 50 {
