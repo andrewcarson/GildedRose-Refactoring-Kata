@@ -35,7 +35,7 @@ diff_program:meld
 #interpreter:ruby
 
 # Settings for the C# Core version
-executable:${TEXTTEST_HOME}/csharp.xUnit/GildedRoseTests/bin/Debug/net8.0/GildedRose.exe
+#executable:${TEXTTEST_HOME}/csharp.xUnit/GildedRoseTests/bin/Debug/net8.0/GildedRose.exe
 
 # Settings for the Perl version
 #executable:${TEXTTEST_HOME}/perl/texttest_fixture.pl
@@ -65,6 +65,6 @@ executable:${TEXTTEST_HOME}/csharp.xUnit/GildedRoseTests/bin/Debug/net8.0/Gilded
 # executable:${TEXTTEST_HOME}/ocaml/_build/default/bin/main.exe
 
 # Settings for the rust version
-# executable:${TEXTTEST_HOME}/rust/target/debug/rust
+executable:${TEXTTEST_HOME}/rust/target/debug/rust
 
 filename_convention_scheme:standard
